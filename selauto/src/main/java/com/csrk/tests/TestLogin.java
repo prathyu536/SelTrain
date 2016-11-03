@@ -1,12 +1,12 @@
 package com.csrk.tests;
 
-import java.awt.Button;
+
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class TestLogin {
 	@AfterTest
 	public void teardown(){
 		
-		webDriver.quit();
+//		webDriver.quit();
 	}
 	
 	
@@ -52,10 +52,13 @@ public class TestLogin {
     	
     	Assert.assertNotNull(element);
     	
+    	List<WebElement> anchorList = webDriver.findElements(By.tagName("a"));
     	
-    }
+    	LOG.debug("The total number of anchors: "+anchorList.size());
+    	
+     }
     
-    @Test
+//    @Test
     public void testInValidLogin(){
     	webDriver.get("http://24.106.206.2:10080/autotools");
     	
@@ -73,6 +76,19 @@ public class TestLogin {
     	
     	Assert.assertNotNull(element);
     	
+    	
+    }
+    
+//    @Test
+    public void testLoginHeader(){
+    	
+    	webDriver.get("http://24.106.206.2:10080/autotools");
+    	
+    	WebElement loginHeader = webDriver.findElement(By.tagName("h1"));
+    	
+    	LOG.debug("The content of the h1 tag is: "+loginHeader.getText());
+    	
+    	Assert.assertEquals(loginHeader.getText(), "Login to Auto Tools");
     	
     }
 
